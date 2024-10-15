@@ -53,6 +53,15 @@ return {
   --   end,
   -- },
   {
+    "echasnovski/mini.animate",
+    event = "VeryLazy",
+    opts = function(_, opts)
+      opts.scroll = {
+        enable = false,
+      }
+    end,
+  },
+  {
     "akinsho/bufferline.nvim",
     keys = {
       { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
