@@ -3,6 +3,7 @@
 -- Add any additional options here
 
 vim.opt.mouse = ""
+vim.opt.relativenumber = false
 
 --Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])

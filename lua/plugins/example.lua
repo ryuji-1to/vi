@@ -95,6 +95,14 @@ return {
       servers = {
         -- tsserver will be automatically installed with mason and loaded with lspconfig
         tsserver = {},
+        volar = {
+          init_options = {
+            vue = {
+              hybridMode = true,
+            },
+          },
+        },
+        vtsls = {},
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
@@ -102,6 +110,13 @@ return {
       setup = {
         -- example to setup with typescript.nvim
         tsserver = function(_, opts)
+          table.insert(opts.servers.vtsls.filetypes, "vue")
+          LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
+            name = "@vue/typescript-plugin",
+            location = LazyVim.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
+            configNamespace = "typescript",
+            enableForWorkspaceTypeScriptVersions = true,
+          })
           require("typescript").setup({ server = opts })
           return true
         end,
@@ -134,6 +149,7 @@ return {
         "typescript",
         "vim",
         "yaml",
+        "vue",
       },
     },
   },
@@ -148,6 +164,7 @@ return {
       vim.list_extend(opts.ensure_installed, {
         "tsx",
         "typescript",
+        "vue",
       })
     end,
   },
@@ -187,6 +204,8 @@ return {
         "shellcheck",
         "shfmt",
         "flake8",
+        "volar",
+        "tsserver",
       },
     },
   },
