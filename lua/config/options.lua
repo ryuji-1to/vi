@@ -4,6 +4,7 @@
 
 vim.opt.mouse = ""
 vim.opt.relativenumber = false
+vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
 
 --Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
