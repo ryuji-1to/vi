@@ -10,6 +10,9 @@ return {
         "fish",
         "gitignore",
         "go",
+        "gomod",
+        "gowork",
+        "gosum",
         "graphql",
         "http",
         "java",
@@ -18,17 +21,18 @@ return {
         "scss",
         "sql",
         "svelte",
+        "haskell",
       },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      config = function(_, opts)
+        require("nvim-treesitter.configs").setup(opts)
 
-      vim.filetype.add({
-        extension = {
-          mdx = "mdx",
-        },
-      })
-      vim.treesitter.language.register("markdown", "mdx")
-    end,
+        vim.filetype.add({
+          extension = {
+            mdx = "mdx",
+          },
+        })
+        vim.treesitter.language.register("markdown", "mdx")
+      end,
+    },
   },
 }

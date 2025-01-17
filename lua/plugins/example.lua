@@ -51,6 +51,9 @@ return {
         function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
         desc = "Find Plugin File",
       },
+      dependencies = {
+        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      },
     },
     -- change some options
     opts = {
@@ -174,7 +177,6 @@ return {
         },
       },
     },
-
     -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
     -- would overwrite `ensure_installed` with the new value.
     -- If you'd rather extend the default config, use the code below instead:
@@ -345,4 +347,145 @@ return {
       end
     end,
   },
+  {
+    "leoluz/nvim-dap-go",
+    opts = {},
+  },
+  {
+    "fredrikaverpil/neotest-golang",
+  },
+  {
+    "echasnovski/mini.icons",
+    opts = {
+      file = {
+        [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
+      },
+      filetype = {
+        gotmpl = { glyph = "󰟓", hl = "MiniIconsGrey" },
+      },
+    },
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    optional = true,
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        opts = { ensure_installed = { "gomodifytags", "impl" } },
+      },
+    },
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      opts.sources = vim.list_extend(opts.sources or {}, {
+        nls.builtins.code_actions.gomodifytags,
+        nls.builtins.code_actions.impl,
+        nls.builtins.formatting.goimports,
+        nls.builtins.formatting.gofumpt,
+      })
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        go = { "goimports", "gofumpt" },
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-dap",
+    optional = true,
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        opts = { ensure_installed = { "delve" } },
+      },
+      {
+        "leoluz/nvim-dap-go",
+        opts = {},
+      },
+    },
+  },
+  -- Haskell
+  {
+    "mrcjkb/haskell-tools.nvim",
+    version = "^3",
+    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+    dependencies = {
+      { "nvim-telescope/telescope.nvim", optional = true },
+    },
+    config = function()
+      local ok, telescope = pcall(require, "telescope")
+      if ok then
+        telescope.load_extension("ht")
+      end
+    end,
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = { ensure_installed = { "haskell-language-server" } },
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = { ensure_installed = { "haskell-debug-adapter" } },
+  },
+  { "mrcjkb/neotest-haskell" },
+  {
+    "mrcjkb/haskell-snippets.nvim",
+    dependencies = { "L3MON4D3/LuaSnip" },
+    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+    config = function()
+      local haskell_snippets = require("haskell-snippets").all
+      require("luasnip").add_snippets("haskell", haskell_snippets, { key = "haskell" })
+    end,
+  },
+  { "L3MON4D3/LuaSnip" },
+  {
+    "luc-tielen/telescope_hoogle",
+    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+    dependencies = {
+      { "nvim-telescope/telescope.nvim" },
+    },
+    config = function()
+      local ok, telescope = pcall(require, "telescope")
+      if ok then
+        telescope.load_extension("hoogle")
+      end
+    end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      setup = {
+        hls = function()
+          return true
+        end,
+      },
+    },
+  },
+  { "nvim-telescope/telescope.nvim", optional = true },
+  {
+    "mfussenegger/nvim-dap",
+    optional = true,
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        opts = { ensure_installed = { "haskell-debug-adapter" } },
+      },
+    },
+  },
+  {
+    "nvim-neotest/neotest",
+    optional = true,
+    dependencies = {
+      { "mrcjkb/neotest-haskell" },
+    },
+    opts = {
+      adapters = {
+        ["neotest-haskell"] = {},
+      },
+    },
+  },
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 }
