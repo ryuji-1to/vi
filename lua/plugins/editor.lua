@@ -101,6 +101,7 @@ return {
         mappings = {
           n = {},
         },
+        file_ignore_patterns = { ".git", "node_modules" },
       })
       opts.pickers = {
         diagnostic = {
