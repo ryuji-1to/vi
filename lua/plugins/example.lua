@@ -272,7 +272,8 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
+    version = "^5",
+    lazy = false,
     ft = { "rust" },
     opts = {
       server = {
@@ -346,66 +347,6 @@ return {
         )
       end
     end,
-  },
-  {
-    "leoluz/nvim-dap-go",
-    opts = {},
-  },
-  {
-    "fredrikaverpil/neotest-golang",
-  },
-  {
-    "echasnovski/mini.icons",
-    opts = {
-      file = {
-        [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
-      },
-      filetype = {
-        gotmpl = { glyph = "󰟓", hl = "MiniIconsGrey" },
-      },
-    },
-  },
-  {
-    "nvimtools/none-ls.nvim",
-    optional = true,
-    dependencies = {
-      {
-        "williamboman/mason.nvim",
-        opts = { ensure_installed = { "gomodifytags", "impl" } },
-      },
-    },
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      opts.sources = vim.list_extend(opts.sources or {}, {
-        nls.builtins.code_actions.gomodifytags,
-        nls.builtins.code_actions.impl,
-        nls.builtins.formatting.goimports,
-        nls.builtins.formatting.gofumpt,
-      })
-    end,
-  },
-  {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        go = { "goimports", "gofumpt" },
-      },
-    },
-  },
-  {
-    "mfussenegger/nvim-dap",
-    optional = true,
-    dependencies = {
-      {
-        "williamboman/mason.nvim",
-        opts = { ensure_installed = { "delve" } },
-      },
-      {
-        "leoluz/nvim-dap-go",
-        opts = {},
-      },
-    },
   },
   -- Haskell
   {
