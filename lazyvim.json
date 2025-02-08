@@ -1,7 +1,9 @@
 {
   "extras": [
     "lazyvim.plugins.extras.lang.haskell",
-    "lazyvim.plugins.extras.lang.toml"
+    "lazyvim.plugins.extras.lang.markdown",
+    "lazyvim.plugins.extras.lang.toml",
+    "lazyvim.plugins.extras.lang.vue"
   ],
   "news": {
     "NEWS.md": "10960"
