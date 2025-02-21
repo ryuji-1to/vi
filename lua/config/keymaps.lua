@@ -6,6 +6,7 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 vim.api.nvim_set_keymap("i", "jj", "<ESC>", opts)
+vim.api.nvim_set_keymap("i", "<C-[>", "<ESC>", opts)
 vim.api.nvim_set_keymap("i", "<C-f>", "<right>", opts)
 
 -- Increment/Decrement
