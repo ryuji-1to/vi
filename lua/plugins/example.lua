@@ -9,6 +9,18 @@ if true then return {} end
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
+  -- add dracula
+  {
+    "Mofiqul/dracula.nvim",
+  },
+
+  -- Configure LazyVim to load dracula
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "dracula",
+    },
+  },
   -- change trouble config
   {
     "folke/trouble.nvim",

@@ -59,6 +59,12 @@ return {
       opts.scroll = {
         enable = false,
       }
+      opts.open = {
+        enable = false,
+      }
+      opts.close = {
+        enable = false,
+      }
     end,
   },
   {
